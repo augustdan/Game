@@ -10,7 +10,6 @@ public class PlayerStateMachine
     {
         CurrentState = startingState;
         CurrentState.Enter();
-
     }
     public void ChangeState(PlayerState newState)
     {

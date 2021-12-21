@@ -12,7 +12,7 @@ public class PlayerState
 
     private string animBoolName;
 
-    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerDaya, string animBoolName)
+    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
     {
         this.player = player;
         this.stateMachine = stateMachine;
@@ -22,11 +22,13 @@ public class PlayerState
     public virtual void Enter()
     {
         DoChecks();
+        player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
+        Debug.Log(animBoolName);
     }
     public virtual void Exit()
     {
-
+        player.Anim.SetBool(animBoolName, false);
     }
     public virtual void LogicUpdate()
     {
