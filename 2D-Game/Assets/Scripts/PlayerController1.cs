@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.UI;
 
-    public class PlayerController1 : MonoBehaviour
+public class PlayerController1 : MonoBehaviour
     {
         private float movementInputDirection;
         private Rigidbody2D rb;
