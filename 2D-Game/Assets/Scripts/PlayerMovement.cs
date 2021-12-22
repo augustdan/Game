@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         view = GetComponent<PhotonView>();
+
         extraJumps = extraJumpValue;
         rb2D = GetComponent<Rigidbody2D>();
     }
