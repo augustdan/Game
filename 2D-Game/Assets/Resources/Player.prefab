@@ -192,6 +192,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   extraJumpValue: 1
+  canDash: 1
+  StartDashTimer: 0.25
+  DashForce: 2
 --- !u!114 &2838643656565096503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +234,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2838643656565096504}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -264,7 +267,7 @@ MonoBehaviour:
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -290,9 +293,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 1
   OwnershipTransfer: 0
-  observableSearch: 2
+  observableSearch: 0
   ObservedComponents:
-  - {fileID: -4506674365178899164}
   - {fileID: -2757767650724382833}
   sceneViewId: 0
   InstantiationId: 0

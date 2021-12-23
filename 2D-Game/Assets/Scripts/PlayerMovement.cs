@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public int extraJumpValue;
 
     private bool facingRight;
+    
     void Start()
     {
         view = GetComponent<PhotonView>();
@@ -40,6 +41,16 @@ public class PlayerMovement : MonoBehaviour
             Vector2 position = transform.position;
             position.x = position.x + speed * horizontal;
             transform.position = position;
+            if (Input.GetKey(KeyCode.Q) && facingRight == false && horizontal != 0)
+            {
+                rb2D.AddForce(new Vector2(10, 0), ForceMode2D.Impulse);
+                Debug.Log("Dash using");
+            }
+            if (Input.GetKey(KeyCode.Q) && facingRight == true && horizontal !=0)
+            {
+                rb2D.AddForce(new Vector2(-10, 0), ForceMode2D.Impulse);
+                Debug.Log("Dash using");
+            }
 
             if (facingRight == false && horizontal < 0)
             {
@@ -49,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Flip();
             }
+            
         }
     }
     private void Update()
@@ -68,7 +80,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb2D.velocity = Vector2.up * JumpForce;
         }
-    }
+           
+        }
     }
     void Flip()
     {
