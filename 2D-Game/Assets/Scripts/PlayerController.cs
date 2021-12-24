@@ -21,13 +21,26 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
+    
+    [Header("WallSliding")]
     public float wallCheckDistance;
     public float wallSlideSpeed;
-
-    public Transform groundCheck;
     public Transform wallCheck;
+    
+    [Header("Ground")]
+    public Transform groundCheck;
+    
 
     public LayerMask whatIsGround;
+
+    [Header("Dashing")]
+    public bool canDash = true;
+    public float dashTime;
+    public float dashSpeed;
+    public float dashJumpIncrease;
+    public float timeBtwDashes;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,11 +56,17 @@ public class PlayerController : MonoBehaviour
         CheckIfCanJump();
         UpdateAnimations();
         CheckIfWallSliding();
+        if (Input.GetKeyDown(KeyCode.Mouse1) && movementInputDirection != 0)
+        {
+            DashAbility();
+            anim.SetTrigger("DashTrigger");
+        }
     }
     private void FixedUpdate()
     {
         ApplyMovement();
         CheckSurroundings();
+        
     }
 
     private void CheckIfWallSliding()
@@ -156,10 +175,28 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
     }
+    private void DashAbility()
+    {
+        if (canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
+    }
+    IEnumerator Dash()
+    {
+        canDash = false;
+        movementSpeed = dashSpeed;
+        jumpForce = dashJumpIncrease;
+        yield return new WaitForSeconds(dashTime);
+        movementSpeed = 11;
+        jumpForce = 18.5f;
+        yield return new WaitForSeconds(timeBtwDashes);
+        canDash = true;
     }
 }

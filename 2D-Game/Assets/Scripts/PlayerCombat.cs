@@ -33,7 +33,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void CheckCombatInput()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.J))
         {
             if (combatEnabled)
             {
