@@ -1529,11 +1529,16 @@ MonoBehaviour:
   groundCheckRadius: 0.4
   wallCheckDistance: 0.8
   wallSlideSpeed: 1
-  groundCheck: {fileID: 498685773}
   wallCheck: {fileID: 981098140}
+  groundCheck: {fileID: 498685773}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  canDash: 1
+  dashTime: 0.3
+  dashSpeed: 30
+  dashJumpIncrease: 35
+  timeBtwDashes: 0.3
 --- !u!95 &1018640101
 Animator:
   serializedVersion: 4
@@ -1923,7 +1928,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.064067, y: 1}
+    m_SensorSize: {x: 1.0520232, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

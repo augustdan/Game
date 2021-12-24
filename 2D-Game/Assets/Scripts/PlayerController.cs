@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     
     [Header("Ground")]
     public Transform groundCheck;
-    
 
     public LayerMask whatIsGround;
 
@@ -39,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed;
     public float dashJumpIncrease;
     public float timeBtwDashes;
+    public bool hasDashed = true;
 
 
     void Start()
@@ -56,10 +56,14 @@ public class PlayerController : MonoBehaviour
         CheckIfCanJump();
         UpdateAnimations();
         CheckIfWallSliding();
+        CheckIfCanDash();
         if (Input.GetKeyDown(KeyCode.Mouse1) && movementInputDirection != 0)
         {
-            DashAbility();
-            anim.SetTrigger("DashTrigger");
+            if (hasDashed == true)
+            {
+                DashAbility();
+                anim.SetTrigger("DashTrigger");
+            } 
         }
     }
     private void FixedUpdate()
@@ -102,6 +106,13 @@ public class PlayerController : MonoBehaviour
         else
         {
             canJump = true;
+        }
+    }
+    private void CheckIfCanDash()
+    {
+        if (isGrounded)
+        {
+            hasDashed = true;
         }
     }
 
@@ -192,11 +203,18 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         movementSpeed = dashSpeed;
-        jumpForce = dashJumpIncrease;
+        //jumpForce = dashJumpIncrease;
         yield return new WaitForSeconds(dashTime);
         movementSpeed = 11;
         jumpForce = 18.5f;
         yield return new WaitForSeconds(timeBtwDashes);
         canDash = true;
+        if (groundCheck)
+        {
+            hasDashed = false;
+            movementSpeed = 11f;
+            jumpForce = 16f;
+            
+        }
     }
 }
