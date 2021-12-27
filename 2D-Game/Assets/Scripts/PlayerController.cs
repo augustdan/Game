@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
             {
                 DashAbility();
                 anim.SetTrigger("DashTrigger");
+                
             } 
         }
     }
