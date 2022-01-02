@@ -4,84 +4,32 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField]
-    private bool combatEnabled;
-    [SerializeField]
-    private float inputTimer, attack1Radius, attack1Damage;
-    [SerializeField]
-    private Transform attack1HitBoxPos;
-    [SerializeField]
-    private LayerMask whatIsDamageable;
+    public Animator anim;
 
-    private bool gotInput, isAttacking, isFirstAttack;
-
-    private float lastInputTime = Mathf.NegativeInfinity;
-    private Animator anim;
-
-
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-        anim.SetBool("canAttack", combatEnabled);
-    }
-
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayer;
     private void Update()
     {
-        CheckCombatInput();
-        CheckAttacks();
-    }
-
-    private void CheckCombatInput()
-    {
-        if(Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (combatEnabled)
-            {
-                gotInput = true;
-                lastInputTime = Time.time;
-            }
+            Attack();
         }
     }
-    
-    private void CheckAttacks()
+    private void Attack()
     {
-        if (gotInput)
+        anim.SetTrigger("Attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        foreach(Collider2D enemy in hitEnemies)
         {
-            if (!isAttacking)
-            {
-                gotInput = false;
-                isAttacking = true;
-                isFirstAttack = !isFirstAttack;
-                anim.SetBool("attack1", true);
-                anim.SetBool("firstAttack", isFirstAttack);
-                anim.SetBool("isAttacking", isAttacking);
-            }
-        }
-        if(Time.time >= lastInputTime + inputTimer)
-        {
-            gotInput = false;
+            Debug.Log("We hit!" + enemy.name);
         }
     }
-
-    private void CheckAttackHitbox()
+    private void OnDrawGizmosSelected()
     {
-        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, whatIsDamageable);
-
-        foreach(Collider2D collider in detectedObjects)
-        {
-            collider.transform.parent.SendMessage("Damage", attack1Damage);
-        }
-    }
-
-    private void FinishAttack1()
-    {
-        isAttacking = false;
-        anim.SetBool("isAttacking", isAttacking);
-        anim.SetBool("attack1", false);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
