@@ -119,10 +119,10 @@ TextureImporter:
       name: Warrior_Idle_1_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1
-        width: 18
-        height: 33
+        x: 0
+        y: 0
+        width: 64
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,7 +130,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 510ee9402b75bcb4fb92163824caff93
+      spriteID: 525d32a07c6a7ce4db8917c2712b01d2
       internalID: 1660273882
       vertices: []
       indices: 

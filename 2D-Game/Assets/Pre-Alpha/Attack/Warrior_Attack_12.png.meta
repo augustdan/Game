@@ -119,10 +119,10 @@ TextureImporter:
       name: Warrior_Attack_12_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1
-        width: 48
-        height: 40
+        x: 0
+        y: 0
+        width: 64
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,7 +147,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Warrior_Attack_12_1: 626014034
       Warrior_Attack_12_0: -1677890525
   spritePackingTag: 
   pSDRemoveMatte: 0
