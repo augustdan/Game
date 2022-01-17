@@ -5,38 +5,56 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int health;
-    public int numOfHearts;
+    public Text healthText;
+    public Image healthBar;
 
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
+    public float health, maxHealth = 100;
+    float lerpSpeed;
 
-    void Update()
+    public void TakeDamage(int damage)
     {
-        if (health > numOfHearts)
+        health -= damage;
+        if (health <= 0)
         {
-            health = numOfHearts;
-        }
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            if (i < health)
-            {
-                hearts[i].sprite = fullHeart;
-            } else
-            {
-                hearts[i].sprite = emptyHeart;
-            }
-            if (i < numOfHearts)
-            {
-                hearts[i].enabled = true;
-            }
-            else
-            {
-                hearts[i].enabled = false;
-            }
+            Debug.Log("Die");
         }
     }
-    // Hello I got 3 on Psyhology
 
+    private void Start()
+    {
+        health = maxHealth;
+    }
+
+    private void Update()
+    {
+        healthText.text = "Health: " + health + "%";
+        if (health > maxHealth) health = maxHealth;
+
+        lerpSpeed = 3f * Time.deltaTime;
+
+        HealthBarFiller();
+        ColorChanger();
+    }
+
+    void HealthBarFiller()
+    {
+        healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, health/maxHealth, lerpSpeed);
+    }
+
+    void ColorChanger()
+    {
+        Color healthColor = Color.Lerp(Color.red, Color.green, (health / maxHealth));
+        healthBar.color = healthColor;
+    }
+
+    public void Damage(float damagePoints)
+    {
+        if (health > 0)
+            health -= damagePoints;
+    }
+    public void Heal(float healingPoints)
+    {
+        if (health < maxHealth)
+            health += healingPoints;
+    }
 }

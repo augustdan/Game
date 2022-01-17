@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public Transform wallCheck;
 
     public LayerMask whatIsGround;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -150,6 +151,7 @@ public class PlayerController : MonoBehaviour
    
     private void Flip()
     {
+
         if (!isWallSliding)
         {
             isFacingRight = !isFacingRight;
