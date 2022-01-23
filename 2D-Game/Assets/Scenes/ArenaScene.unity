@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 238113225}
   - component: {fileID: 238113224}
   - component: {fileID: 238113223}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Warrior (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +801,6 @@ MonoBehaviour:
   whatIsDamageable:
     serializedVersion: 2
     m_Bits: 0
-  damage: 20
 --- !u!114 &238113230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,7 +832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238113222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -83.08, y: 14.394568, z: 0}
+  m_LocalPosition: {x: -84.54, y: 14.394568, z: 0}
   m_LocalScale: {x: 6.7176, y: 6.680653, z: 6.7176}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1493,7 +1492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 998221984}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1767,8 +1766,7 @@ MonoBehaviour:
   attack1HitBoxPos: {fileID: 949673103}
   whatIsDamageable:
     serializedVersion: 2
-    m_Bits: 0
-  damage: 20
+    m_Bits: 256
 --- !u!114 &1018640103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,7 +2001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061450072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2861,7 +2859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1709135638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Attack1Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25555,7 +25553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2064641859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

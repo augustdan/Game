@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool isTouchingWall;
     private bool isWallSliding;
     private bool canJump;
+    bool isHurting, isDead;
 
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
@@ -118,8 +119,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInput()
     {
-        movementInputDirection = Input.GetAxisRaw("Horizontal");
-
+            movementInputDirection = Input.GetAxisRaw("Horizontal");
+        
         if (Input.GetButtonDown("Jump")) 
         {
             Jump();
@@ -137,8 +138,8 @@ public class PlayerController : MonoBehaviour
     }
     private void ApplyMovement()
     {
-        rb.velocity = new Vector2(movementSpeed*movementInputDirection, rb.velocity.y);
-
+        rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        
         if (isWallSliding)
         {
             if(rb.velocity.y < -wallSlideSpeed)

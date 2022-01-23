@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
+    private Rigidbody2D rb;
     public Text healthText;
     public Image healthBar;
-
+    private Animator anim;
     public float health, maxHealth = 100;
     float lerpSpeed;
 
@@ -16,13 +18,16 @@ public class Health : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            Die();
             Debug.Log("Die");
         }
     }
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -50,11 +55,23 @@ public class Health : MonoBehaviour
     public void Damage(float damagePoints)
     {
         if (health > 0)
+        {
             health -= damagePoints;
+        }
+        
     }
     public void Heal(float healingPoints)
     {
         if (health < maxHealth)
             health += healingPoints;
     }
+    private void Die()
+    {
+        rb.bodyType = RigidbodyType2D.Static;
+        anim.SetTrigger("isDead");
+    }
+    //private void RestartLevel()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    //}
 }
