@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombatD : NetworkBehaviour
 {
     public Animator anim;
 
@@ -15,13 +16,18 @@ public class PlayerCombat : MonoBehaviour
     [Header("Combo punch")]
     public int combo;
     public bool attackDo;
-    
+
+    public int maxHealth = 100;
+    public int currentHealth = 100;
     private void Start()
     {
+        currentHealth = maxHealth;
         anim = GetComponent<Animator>();
     }
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
         Combo();
        //if (Input.GetKeyDown(KeyCode.F))
        // {
@@ -31,10 +37,18 @@ public class PlayerCombat : MonoBehaviour
     private void Attack()
     {
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        foreach(Collider2D enemy in hitEnemies)
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        foreach(GameObject collider in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            
+            //collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
+            if(collider.tag == "Team2")
+            {
+                collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
+                Debug.Log("We hit enemy");
+                
+            }
+
         }
     }
     private void OnDrawGizmosSelected()
@@ -64,5 +78,27 @@ public class PlayerCombat : MonoBehaviour
     {
         attackDo = false;
         combo = 0;
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        anim.SetTrigger("Hurt");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Enemy Died!");
+
+        //anim.SetBool("IsDead", true);
+
+        //GetComponent<Collider2D>().enabled = false;
+
+        //this.enabled = false;
+        Destroy(this.gameObject, 1.5f);
     }
 }

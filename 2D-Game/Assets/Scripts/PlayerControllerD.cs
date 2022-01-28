@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerControllerD : NetworkBehaviour
 {
     private float movementInputDirection;
     private Rigidbody2D rb;
@@ -44,10 +44,10 @@ public class PlayerController : NetworkBehaviour
 
     void Start()
     {
-        if (isLocalPlayer == false)
+        if (!isLocalPlayer)
             return;
-        
-            rb = GetComponent<Rigidbody2D>();
+
+        rb = GetComponent<Rigidbody2D>();
             anim = GetComponent<Animator>();
             amountOfJumpsLeft = amountOfJumps;
         
@@ -56,6 +56,8 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer)
+            return;
         CheckInput();
         CheckMovementDirection();
         CheckIfCanJump();
@@ -74,6 +76,8 @@ public class PlayerController : NetworkBehaviour
     }
     private void FixedUpdate()
     {
+        if (isLocalPlayer == false)
+            return;
         ApplyMovement();
         CheckSurroundings();
         

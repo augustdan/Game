@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 4121113488776308398}
   - component: {fileID: -1380473372702474408}
   - component: {fileID: 5080567512574165789}
+  - component: {fileID: 7001362541248633294}
   m_Layer: 0
   m_Name: PlayerD
   m_TagString: Untagged
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4121113488776308373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89efeed3c9c0bc54b93cd77d584837d9, type: 3}
   m_Name: 
@@ -139,15 +140,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df3cd36416fba747aa30ecd85351f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   anim: {fileID: 4121113488776308398}
   attackPoint: {fileID: 4121113488845753540}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 0
   attackRange: 0.76
   attackDamage: 40
   combo: 0
   attackDo: 0
+  maxHealth: 100
+  currentHealth: 0
 --- !u!212 &4121113488776308393
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -318,6 +323,22 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &7001362541248633294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121113488776308373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 4121113488776308398}
 --- !u!1 &4121113488845753541
 GameObject:
   m_ObjectHideFlags: 0
