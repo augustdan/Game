@@ -38,7 +38,7 @@ public class PlayerCombatD : NetworkBehaviour
     {
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
-        foreach(GameObject collider in hitEnemies)
+        foreach(Collider2D collider in hitEnemies)
         {
             
             //collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
