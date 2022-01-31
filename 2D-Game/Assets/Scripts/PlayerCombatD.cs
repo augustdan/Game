@@ -18,9 +18,12 @@ public class PlayerCombatD : NetworkBehaviour
     public bool attackDo;
 
     public int maxHealth = 100;
+    [SyncVar]
     public int currentHealth = 100;
     private void Start()
     {
+        if (!isLocalPlayer)
+            return;
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
     }
@@ -28,25 +31,26 @@ public class PlayerCombatD : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-        Combo();
-       //if (Input.GetKeyDown(KeyCode.F))
-       // {
-       //     Attack();
-       // }
+        CmdCombo();
+        //if (Input.GetKeyDown(KeyCode.F))
+        // {
+        //     Attack();
+        // }
     }
+
     private void Attack()
     {
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
-        foreach(Collider2D collider in hitEnemies)
+        foreach (Collider2D collider in hitEnemies)
         {
-            
+
             //collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
-            if(collider.tag == "Team2")
+            if (collider.tag == "Team2")
             {
                 collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
                 Debug.Log("We hit enemy");
-                
+
             }
 
         }
@@ -57,7 +61,7 @@ public class PlayerCombatD : NetworkBehaviour
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    public void Combo()
+    public void CmdCombo()
     {
         if (Input.GetKeyDown(KeyCode.F) && !attackDo)
         {
@@ -69,7 +73,7 @@ public class PlayerCombatD : NetworkBehaviour
     public void Start_Combo()
     {
         attackDo = false;
-        if( combo < 2)
+        if (combo < 2)
         {
             combo++;
         }
@@ -81,6 +85,8 @@ public class PlayerCombatD : NetworkBehaviour
     }
     public void TakeDamage(int damage)
     {
+        if (!isServer)
+            return;
         currentHealth -= damage;
 
         anim.SetTrigger("Hurt");
