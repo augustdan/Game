@@ -12,16 +12,17 @@ public class PlayerCombatD : NetworkBehaviour
 
     public float attackRange = 0.5f;
     public int attackDamage = 40;
-
+    public string tag;
     [Header("Combo punch")]
     public int combo;
     public bool attackDo;
-
+    [SyncVar]
     public int maxHealth = 100;
     [SyncVar]
     public int currentHealth = 100;
     private void Start()
     {
+        tag = gameObject.tag;
         if (!isLocalPlayer)
             return;
         currentHealth = maxHealth;
@@ -46,7 +47,7 @@ public class PlayerCombatD : NetworkBehaviour
         {
 
             //collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
-            if (collider.tag == "Team2")
+            if (gameObject.tag == "Team1" && collider.tag == "Team2")
             {
                 collider.GetComponent<PlayerCombatD>().TakeDamage(attackDamage);
                 Debug.Log("We hit enemy");
