@@ -1571,6 +1571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1018640095}
+  - component: {fileID: 1018640105}
   - component: {fileID: 1018640100}
   - component: {fileID: 1018640102}
   - component: {fileID: 1018640098}
@@ -1579,7 +1580,6 @@ GameObject:
   - component: {fileID: 1018640101}
   - component: {fileID: 1018640103}
   - component: {fileID: 1018640104}
-  - component: {fileID: 1018640105}
   m_Layer: 9
   m_Name: Warrior
   m_TagString: Player
@@ -1807,12 +1807,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1018640094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98327667686fde4d9cacf27772f2dbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3af82faff81b67a44a5c72b45d710fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFull: 
-  slots:
-  - {fileID: 0}
+  dashForce: 2000
+  durationVar: 0.1
+  varCD: 5
+  canDash: 0
 --- !u!1 &1027986851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2269,7 +2270,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776, y: 1}
+    m_SensorSize: {x: 1.7786753, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

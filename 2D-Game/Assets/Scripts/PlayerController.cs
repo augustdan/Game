@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInput()
     {
-            movementInputDirection = Input.GetAxisRaw("Horizontal");
+        movementInputDirection = Input.GetAxisRaw("Horizontal");
         
         if (Input.GetButtonDown("Jump")) 
         {
