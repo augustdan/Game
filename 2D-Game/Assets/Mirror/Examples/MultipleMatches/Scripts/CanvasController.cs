@@ -103,6 +103,7 @@ namespace Mirror.Examples.MultipleMatch
             lobbyView.SetActive(false);
             roomView.SetActive(false);
             gameObject.SetActive(false);
+            //Debug.Log("Reset Canvas");
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace Mirror.Examples.MultipleMatch
 
         public void RefreshRoomPlayers(PlayerInfo[] playerInfos)
         {
-            // Debug.Log($"RefreshRoomPlayers: {playerInfos.Length} playerInfos");
+             Debug.Log($"RefreshRoomPlayers: {playerInfos.Length} playerInfos");
 
             foreach (Transform child in playerList.transform)
             {

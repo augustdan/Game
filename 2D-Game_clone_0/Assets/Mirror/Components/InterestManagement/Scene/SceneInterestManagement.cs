@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 namespace Mirror
 {
@@ -19,7 +20,7 @@ namespace Mirror
         {
             Scene currentScene = identity.gameObject.scene;
             lastObjectScene[identity] = currentScene;
-            // Debug.Log($"SceneInterestManagement.OnSpawned({identity.name}) currentScene: {currentScene}");
+            //Debug.Log($"SceneInterestManagement.OnSpawned({identity.name}) currentScene: {currentScene}");
             if (!sceneObjects.TryGetValue(currentScene, out HashSet<NetworkIdentity> objects))
             {
                 objects = new HashSet<NetworkIdentity>();

@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*
-	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
-	API Reference: https://mirror-networking.com/docs/api/Mirror.NetworkManager.html
-*/
-
 namespace Mirror.Examples.MultipleAdditiveScenes
 {
     [AddComponentMenu("")]
@@ -18,7 +13,7 @@ namespace Mirror.Examples.MultipleAdditiveScenes
         public GameObject rewardPrefab;
 
         [Header("MultiScene Setup")]
-        public int instances = 3;
+        public int instances = 0;
 
         [Scene]
         public string gameScene;
@@ -33,7 +28,10 @@ namespace Mirror.Examples.MultipleAdditiveScenes
         int clientIndex;
 
         #region Server System Callbacks
-
+        /*private void Awake()
+        {
+            NetworkClient.RegisterPrefab(playerPrefab);
+        }*/
         /// <summary>
         /// Called on the server when a client adds a new player with NetworkClient.AddPlayer.
         /// <para>The default implementation for this function creates a new player object from the playerPrefab.</para>
@@ -62,16 +60,22 @@ namespace Mirror.Examples.MultipleAdditiveScenes
 
             PlayerScore playerScore = conn.identity.GetComponent<PlayerScore>();
             playerScore.playerNumber = clientIndex;
-            playerScore.scoreIndex = clientIndex / subScenes.Count;
-            playerScore.matchIndex = clientIndex % subScenes.Count;
+            //playerScore.scoreIndex = clientIndex / subScenes.Count;
+           // playerScore.matchIndex = clientIndex % subScenes.Count;
+
+            clientIndex++;
 
             // Do this only on server, not on clients
             // This is what allows the NetworkSceneChecker on player and scene objects
             // to isolate matches per scene instance on server.
-            if (subScenes.Count > 0)
-                SceneManager.MoveGameObjectToScene(conn.identity.gameObject, subScenes[clientIndex % subScenes.Count]);
+            /*if (subScenes.Count > 0)
+                SceneManager.MoveGameObjectToScene(conn.identity.gameObject, subScenes[clientIndex % subScenes.Count]);*/
+        }
 
-            clientIndex++;
+        public void changeScene(NetworkConnection conn, int index)
+        {
+            if (subScenes.Count > 0)
+                SceneManager.MoveGameObjectToScene(conn.identity.gameObject, subScenes[index]);
         }
 
         #endregion
@@ -100,6 +104,25 @@ namespace Mirror.Examples.MultipleAdditiveScenes
                 subScenes.Add(newScene);
                 Spawner.InitialSpawn(newScene);
             }
+
+            subscenesLoaded = true;
+        }
+
+        public void addNewScene()
+        {
+            StartCoroutine(ServerLoadSubScenes2());
+        }
+
+        IEnumerator ServerLoadSubScenes2()
+        {
+            //this will add a new scene to game when an owner creates a room
+            yield return SceneManager.LoadSceneAsync(gameScene, new LoadSceneParameters { loadSceneMode = LoadSceneMode.Additive, localPhysicsMode = LocalPhysicsMode.Physics3D });
+
+            Scene newScene = SceneManager.GetSceneAt(instances + 1);
+            subScenes.Add(newScene);
+            Spawner.InitialSpawn(newScene);
+            //Everytime a new scene is added, will increment instances variable
+            instances = instances + 1;
 
             subscenesLoaded = true;
         }

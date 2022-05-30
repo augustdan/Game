@@ -98,6 +98,7 @@ namespace Mirror.Examples.MultipleMatch
         public override void OnStartClient()
         {
             canvas.SetActive(true);
+            Debug.Log("Canvas has activated");
             canvasController.OnStartClient();
         }
 

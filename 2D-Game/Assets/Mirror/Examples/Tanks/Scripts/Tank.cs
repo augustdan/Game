@@ -66,7 +66,67 @@ namespace Mirror.Examples.Tanks
         {
             animator.SetTrigger("Shoot");
         }
+        public GameObject[] objectsToHide;
+        private SceneScript sceneScript;
 
+        [SyncVar(hook = nameof(OnChanged))]
+        public bool isDead = false;
+
+        void OnChanged(bool _Old, bool _New)
+        {
+            if (isDead == false) // respawn
+            {
+                // allow user to kill themselves via button, just for prototyping
+                foreach (var obj in objectsToHide)
+                {
+                    obj.SetActive(true);
+                }
+
+                if (isLocalPlayer)
+                {
+                    // Uses NetworkStartPosition feature, optional.
+                    this.transform.position = NetworkManager.startPositions[Random.Range(0, NetworkManager.startPositions.Count)].position;
+                }
+
+                sceneScript.statusText.text = "Player Respawned";
+            }
+            else if (isDead == true) // death
+            {
+                // have meshes hidden, disable movement and show respawn button
+                foreach (var obj in objectsToHide)
+                {
+                    obj.SetActive(false);
+                }
+
+                sceneScript.statusText.text = "Player Defeated";
+            }
+
+            if (isLocalPlayer)
+            {
+                sceneScript.SetupScene();
+            }
+        }
+
+        void Awake()
+        {
+            //allow all players to run this, maybe they will need references to it in the future
+            sceneScript = GameObject.FindObjectOfType<SceneScript>();
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            // local player sets reference to scene scripts variable, so they can communicate with each other
+            // you could also use regular Start() and if( isLocalPlayer ) { } instead of  OnStartLocalPlayer()
+            sceneScript.playerScript = this;
+            sceneScript.SetupScene();
+        }
+
+        [Command]
+        public void CmdPlayerStatus(bool _value)
+        {
+            // player info sent to server, then server changes sync var which updates, causing hooks to fire
+            isDead = _value;
+        }
         [ServerCallback]
         void OnTriggerEnter(Collider other)
         {

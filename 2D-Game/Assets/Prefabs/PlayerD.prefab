@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4121113488223061766}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,10 @@ GameObject:
   - component: {fileID: 5080567512574165789}
   - component: {fileID: 7001362541248633294}
   - component: {fileID: 7803362284701647998}
-  m_Layer: 0
+  - component: {fileID: -8130252259317890969}
+  - component: {fileID: -2096998413071235981}
+  - component: {fileID: 8310226324871280425}
+  m_Layer: 9
   m_Name: PlayerD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,10 +337,55 @@ MonoBehaviour:
   syncInterval: 0.1
   maxHealth: 100
   currentHealth: 0
+  tag: 
+  currentTag: 
   anim: {fileID: 4121113488776308398}
   attackPoint: {fileID: 4121113488845753540}
   attackRange: 0.5
   attackDamage: 40
+--- !u!114 &-8130252259317890969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121113488776308373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d17e718851449a6879986e45c458fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &-2096998413071235981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121113488776308373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff2b07ed6a467d489f9ff877ba1fae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &8310226324871280425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121113488776308373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489e6debf296d8b49bf5d1fe223c342e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  buttonMove: {fileID: 0}
 --- !u!1 &4121113488845753541
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4121113488845753540}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4121113488872984279}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
