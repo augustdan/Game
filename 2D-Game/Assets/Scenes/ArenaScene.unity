@@ -1811,7 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashForce: 2000
-  durationVar: 0.1
+  durationVar: 0.05
   varCD: 5
   canDash: 0
 --- !u!1 &1027986851
