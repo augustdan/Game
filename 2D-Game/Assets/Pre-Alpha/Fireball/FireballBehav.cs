@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FireballBehav : MonoBehaviour
 {
-    public float speed = 20f;
-    public int damage = 40;
+    public float speed = 40f;
+    public int damage = 20;
     public Rigidbody2D rb;
     void Start()
     {

@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public Transform wallCheck;
 
     public LayerMask whatIsGround;
+
+    public ParticleSystem dust;
     
     void Start()
     {
@@ -131,6 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
+            CreateDust();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             amountOfJumpsLeft--;
         }
@@ -155,6 +158,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isWallSliding)
         {
+            CreateDust();
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
@@ -164,5 +168,10 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
     }
 }
